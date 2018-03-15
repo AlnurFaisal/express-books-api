@@ -1,3 +1,6 @@
+if(process.env.NODE_ENV !== 'production') {
+  require('dotenv').load();
+}
 var express = require("express");
 var path = require("path");
 var favicon = require("serve-favicon");
@@ -6,7 +9,7 @@ var cookieParser = require("cookie-parser");
 var bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 
-mongoose.connect('mongodb://localhost/dbbooks');
+mongoose.connect(process.env.DB_HOST);
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
