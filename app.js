@@ -4,6 +4,14 @@ var favicon = require("serve-favicon");
 var logger = require("morgan");
 var cookieParser = require("cookie-parser");
 var bodyParser = require("body-parser");
+const mongoose = require("mongoose");
+
+mongoose.connect('mongodb://localhost/dbbooks');
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function() {
+    console.log('You are connected to MongoDB!');
+});
 
 var index = require("./routes/index");
 var books = require("./routes/books");
